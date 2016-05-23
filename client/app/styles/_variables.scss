@@ -1,0 +1,6 @@
+$light-grey: rgb(167, 167, 167);
+$transparent-black: rgba(0, 0, 0, 0.6);
+$positive: rgba(0, 212, 213, 0.7);
+
+//z-index for the controls over video element should be >= 2147483647, so they are visible in fullscreen mode
+$video-controls-min-z-index: 2147483647;

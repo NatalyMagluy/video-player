@@ -1,0 +1,120 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.video-controls {
+  height: 40px;
+  background-color: $transparent-black;
+
+  .left {
+    float: left;
+  }
+
+  .right {
+    float: right;
+    padding-right: 5px;
+  }
+
+  .one-icon-only {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+  }
+
+  .group {
+    display: inline-block;
+    padding: 0 7px;
+  }
+
+  [type="range"] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70px;
+
+    &::-webkit-slider-runnable-track {
+      height: 5px;
+      border-radius: 3px;
+      background-color: $light-grey;
+    }
+
+    &::-webkit-slider-thumb {
+      position: relative;
+      top: -4px;
+    }
+  }
+
+  .time {
+    color: $light-grey;
+    line-height: 40px;
+    vertical-align: middle;
+  }
+
+  .glyphicon {
+    color: $light-grey;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 40px;
+    vertical-align: middle;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  .volume .glyphicon {
+    font-size: 20px;
+  }
+
+  .glyphicon-cog {
+    font-size: 18px;
+  }
+
+  .glyphicon-resize-full {
+    font-size: 15px;
+  }
+
+  .settings-wrapper {
+    position: relative;
+
+    .settings-list {
+      position: absolute;
+      bottom: 45px;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.64);
+      color: $light-grey;
+      white-space: nowrap;
+      transition: opacity .3s;
+
+      &.resolutions {
+        left: -30px;
+      }
+
+      &.modes {
+        left: -30px;
+      }
+
+      &.visible {
+        display: inline;
+        > div {
+          cursor: pointer;
+        }
+      }
+
+      > div {
+        padding: 5px;
+        cursor: default;
+
+        &:hover, &.active {
+          color: #ffffff;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}

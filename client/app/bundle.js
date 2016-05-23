@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "84f3ed7e71e398106ca3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d3003505a79940055eb0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -44251,14 +44251,23 @@
 	var routes = __webpack_require__(34);
 	var MainController = __webpack_require__(36);
 
+	var mainHeaderDirective = __webpack_require__(37);
+	var playerDirective = __webpack_require__(41);
+	var videoSeekDirective = __webpack_require__(46);
+	var videoControlsDirective = __webpack_require__(50);
+
 	var name = 'videoPlayer';
 
 	//TODO: check if this is correct way to do it
 	module.exports = angular
 	    .module(name, [
-	        __webpack_require__(37)
+	        __webpack_require__(54)
 	    ])
 	    .controller('MainController', MainController)
+	    .directive('mainHeader', mainHeaderDirective)
+	    .directive('player', playerDirective)
+	    .directive('videoSeek', videoSeekDirective)
+	    .directive('videoControls', videoControlsDirective)
 	    .config(config)
 	    .config(routes);
 
@@ -44299,7 +44308,7 @@
 /* 35 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n  Main controller\n</div>"
+	module.exports = "<div>\n  <player></player>\n</div>"
 
 /***/ },
 /* 36 */
@@ -44313,6 +44322,280 @@
 
 /***/ },
 /* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var template = __webpack_require__(38);
+	__webpack_require__(39);
+
+	module.exports = function videoSeek() {
+	    'use strict';
+
+	    return {
+	        restrict: 'E',
+	        template: template
+	    };
+	};
+
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	module.exports = "<nav class=\"main-header navbar navbar-default\">\n    <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n            <a class=\"navbar-brand\" href=\"#\">\n                Video Player Proof of Concept\n            </a>\n        </div>\n    </div>\n</nav>"
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(40);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(16)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(40, function() {
+				var newContent = __webpack_require__(40);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".main-header.navbar {\n  margin-bottom: 0; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var template = __webpack_require__(42);
+	var controller = __webpack_require__(43);
+	__webpack_require__(44);
+
+	module.exports = function playerDirective() {
+	    return {
+	        template: template,
+	        controller: controller,
+	        controllerAs: 'player'
+	    }
+	};
+
+
+/***/ },
+/* 42 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"theater\">\n  <div class=\"video-player-wrapper\">\n    <video>\n      <p>\n        Sorry, your browser doesn't support HTML5 video.\n      </p>\n    </video>\n    <div class=\"bottom-panel\">\n      <video-seek></video-seek>\n      <video-controls></video-controls>\n    </div>\n  </div>\n</div>"
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	module.exports = function PlayerController() {
+	    var vm = this;
+	};
+
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(45);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(16)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(45, function() {
+				var newContent = __webpack_require__(45);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".theater {\n  background-color: #000; }\n\n.video-player-wrapper {\n  position: relative;\n  margin: 0 auto;\n  overflow-y: hidden;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none; }\n  .video-player-wrapper, .video-player-wrapper video {\n    width: 100%; }\n  .video-player-wrapper video::-webkit-media-controls, .video-player-wrapper video::-webkit-media-controls-enclosure {\n    display: none !important; }\n  .video-player-wrapper .bottom-panel {\n    display: none;\n    position: absolute;\n    z-index: 2147483647;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    opacity: 0;\n    transition: opacity .3s; }\n  .video-player-wrapper:hover .bottom-panel {\n    opacity: 1; }\n\n@media screen and (min-width: 440px) {\n  .video-player-wrapper .bottom-panel {\n    display: block; } }\n\n@media screen and (min-width: 640px) {\n  .video-player-wrapper, .video-player-wrapper video {\n    width: 640px;\n    height: 360px; } }\n\n@media screen and (min-width: 992px) {\n  .video-player-wrapper, .video-player-wrapper video {\n    width: 854px;\n    height: 480px; } }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var template = __webpack_require__(47);
+	__webpack_require__(48);
+
+	module.exports = function videoSeek() {
+	    'use strict';
+
+	    return {
+	        restrict: 'E',
+	        template: template,
+
+	        controller: function VideoPlayerController() {
+	            var vm = this;
+	        },
+	        controllerAs: 'seek'
+	    };
+	};
+
+
+/***/ },
+/* 47 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"video-seek\">\n    <div class=\"seek-track\"></div>\n    <div class=\"loaded\" style=\"width: 50%;\"></div>\n    <div class=\"seeking\" style=\"width: 20%;\"></div>\n    <div class=\"played\" style=\"width: 10%;\"></div>\n    <div class=\"seekable-time\" style=\"left: 20%\">\n        00:50\n    </div>\n</div>"
+
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(49);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(16)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(49, function() {
+				var newContent = __webpack_require__(49);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".video-seek {\n  position: relative;\n  top: 2px;\n  height: 17px;\n  cursor: pointer; }\n  .video-seek .seek-track, .video-seek .loaded, .video-seek .seeking, .video-seek .played {\n    position: absolute;\n    top: 10px;\n    height: 5px; }\n  .video-seek .seek-track {\n    width: 100%;\n    background-color: rgba(255, 255, 255, 0.3); }\n  .video-seek .loaded {\n    background-color: rgba(255, 255, 255, 0.5);\n    z-index: 10; }\n  .video-seek .seeking {\n    background-color: rgba(255, 255, 255, 0.7);\n    opacity: 0;\n    z-index: 20; }\n  .video-seek:hover .seeking {\n    opacity: 1; }\n  .video-seek .seekable-time {\n    position: absolute;\n    top: -34px;\n    padding: 4px;\n    background-color: rgba(0, 0, 0, 0.6);\n    color: #a7a7a7;\n    opacity: 0;\n    transition: opacity 0.3s;\n    margin-left: -30px; }\n  .video-seek:hover .seekable-time {\n    opacity: 1; }\n  .video-seek .played {\n    background-color: rgba(0, 212, 213, 0.7);\n    z-index: 30; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var template = __webpack_require__(51);
+	__webpack_require__(52);
+
+	module.exports = function videoControls() {
+	    return {
+	        restrict: 'E',
+	        template: template,
+	        controller: function VideoPlayerController() {
+	            var vm = this;
+	            vm.isPlaying = false;
+	            vm.currentVolume = 4;
+	            vm.resolutions = ['480', '720', '1080'];
+	            vm.fullScreenEntered = false;
+	            vm.showResolutions = false;
+	            vm.showModes = false;
+	        },
+	        controllerAs: 'controls'
+	    };
+	};
+
+
+/***/ },
+/* 51 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"video-controls\">\n    <div class=\"left\">\n        <div class=\"group\">\n            <span class=\"glyphicon glyphicon-step-backward\"\n                  aria-hidden=\"true\"></span>\n            <span class=\"glyphicon glyphicon-backward\"\n                  aria-hidden=\"true\"></span>\n\n            <div class=\"one-icon-only\">\n                <span ng-if=\"!controls.isPlaying\"\n                      class=\"glyphicon glyphicon-play\"\n                      aria-hidden=\"true\">\n                </span>\n\n                <span ng-if=\"controls.isPlaying\"\n                      class=\"glyphicon glyphicon-pause\"\n                      aria-hidden=\"true\">\n                </span>\n            </div>\n\n            <span class=\"glyphicon glyphicon-forward\"\n                  aria-hidden=\"true\"></span>\n            <span class=\"glyphicon glyphicon-step-forward\"\n                  aria-hidden=\"true\"></span>\n        </div>\n\n        <div class=\"time group\">\n            00:02 / 05:10\n        </div>\n    </div>\n\n    <div class=\"right\">\n        <div class=\"volume group\">\n            <div class=\"one-icon-only\">\n                <span ng-if=\"controls.currentVolume == 0\"\n                      class=\"glyphicon glyphicon-volume-off\"\n                      aria-hidden=\"true\">\n                </span>\n\n                <span ng-if=\"controls.currentVolume >= 1 && controls.currentVolume <= 6\"\n                      class=\"glyphicon glyphicon-volume-down\"\n                      aria-hidden=\"true\">\n                </span>\n\n                <span ng-if=\"controls.currentVolume > 6\"\n                      class=\"glyphicon glyphicon-volume-up\"\n                      aria-hidden=\"true\">\n                </span>\n            </div>\n\n            <input type=\"range\" min=\"0\" max=\"10\"\n                   ng-model=\"controls.currentVolume\">\n        </div>\n\n        <div class=\"settings-wrapper group\">\n            <span class=\"glyphicon glyphicon-cog\"\n                  aria-hidden=\"true\"\n                  ng-click=\"controls.showResolutions = !controls.showResolutions;\">\n            </span>\n\n            <div ng-class=\"{ visible: controls.showResolutions }\" class=\"settings-list resolutions\">\n                <div ng-repeat=\"res in controls.resolutions\">\n                    {{::res}}\n                </div>\n            </div>\n        </div>\n\n        <div class=\"settings-wrapper group\">\n            <span class=\"glyphicon glyphicon-film\"\n                  aria-hidden=\"true\"\n                  ng-click=\"controls.showModes = !controls.showModes;\">\n            </span>\n\n            <div ng-class=\"{ visible: controls.showModes }\" class=\"settings-list modes\">\n                <div>\n                    MSE\n                </div>\n                <div>\n                    Library\n                </div>\n            </div>\n        </div>\n\n        <div class=\"group one-icon-only\">\n            <span ng-if=\"!controls.fullScreenEntered\"\n                  class=\"glyphicon glyphicon-resize-full\"\n                  aria-hidden=\"true\">\n            </span>\n\n            <span ng-if=\"controls.fullScreenEntered\"\n                  class=\"glyphicon glyphicon-resize-small\"\n                  aria-hidden=\"true\">\n            </span>\n        </div>\n    </div>\n</div>"
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(53);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(16)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(53, function() {
+				var newContent = __webpack_require__(53);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".video-controls {\n  height: 40px;\n  background-color: rgba(0, 0, 0, 0.6); }\n  .video-controls .left {\n    float: left; }\n  .video-controls .right {\n    float: right;\n    padding-right: 5px; }\n  .video-controls .one-icon-only {\n    display: inline-block;\n    vertical-align: middle;\n    overflow: hidden; }\n  .video-controls .group {\n    display: inline-block;\n    padding: 0 7px; }\n  .video-controls [type=\"range\"] {\n    display: inline-block;\n    vertical-align: middle;\n    width: 70px; }\n    .video-controls [type=\"range\"]::-webkit-slider-runnable-track {\n      height: 5px;\n      border-radius: 3px;\n      background-color: #a7a7a7; }\n    .video-controls [type=\"range\"]::-webkit-slider-thumb {\n      position: relative;\n      top: -4px; }\n  .video-controls .time {\n    color: #a7a7a7;\n    line-height: 40px;\n    vertical-align: middle; }\n  .video-controls .glyphicon {\n    color: #a7a7a7;\n    cursor: pointer;\n    font-size: 16px;\n    line-height: 40px;\n    vertical-align: middle; }\n    .video-controls .glyphicon:focus {\n      outline: none; }\n    .video-controls .glyphicon:hover {\n      color: #ffffff; }\n  .video-controls .volume .glyphicon {\n    font-size: 20px; }\n  .video-controls .glyphicon-cog {\n    font-size: 18px; }\n  .video-controls .glyphicon-resize-full {\n    font-size: 15px; }\n  .video-controls .settings-wrapper {\n    position: relative; }\n    .video-controls .settings-wrapper .settings-list {\n      position: absolute;\n      bottom: 45px;\n      display: none;\n      background-color: rgba(0, 0, 0, 0.64);\n      color: #a7a7a7;\n      white-space: nowrap;\n      transition: opacity .3s; }\n      .video-controls .settings-wrapper .settings-list.resolutions {\n        left: -30px; }\n      .video-controls .settings-wrapper .settings-list.modes {\n        left: -30px; }\n      .video-controls .settings-wrapper .settings-list.visible {\n        display: inline; }\n        .video-controls .settings-wrapper .settings-list.visible > div {\n          cursor: pointer; }\n      .video-controls .settings-wrapper .settings-list > div {\n        padding: 5px;\n        cursor: default; }\n        .video-controls .settings-wrapper .settings-list > div:hover, .video-controls .settings-wrapper .settings-list > div.active {\n          color: #ffffff; }\n        .video-controls .settings-wrapper .settings-list > div:focus {\n          outline: none; }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 54 */
 /***/ function(module, exports) {
 
 	/**

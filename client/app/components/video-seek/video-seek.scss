@@ -1,0 +1,55 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.video-seek {
+  position: relative;
+  top: 2px;
+  height: 17px;
+  cursor: pointer;
+
+  .seek-track, .loaded, .seeking, .played {
+    position: absolute;
+    top: 10px;
+    height: 5px;
+  }
+
+  .seek-track {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .loaded {
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 10;
+  }
+
+  .seeking {
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    z-index: 20;
+  }
+
+  &:hover .seeking {
+    opacity: 1;
+  }
+
+  .seekable-time {
+    position: absolute;
+    top: -34px;
+    padding: 4px;
+    background-color: $transparent-black;
+    color: $light-grey;
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin-left: -30px;
+  }
+
+  &:hover .seekable-time {
+    opacity: 1;
+  }
+
+  .played {
+    background-color: $positive;
+    z-index: 30;
+  }
+}

@@ -1,0 +1,60 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.theater {
+  background-color: #000;
+}
+
+.video-player-wrapper {
+  &, video {
+    width: 100%;
+  }
+
+  position: relative;
+  margin: 0 auto;
+  overflow-y: hidden;
+
+  @include no-text-select;
+
+  .bottom-panel {
+    display: none;
+    position: absolute;
+    z-index: $video-controls-min-z-index;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  &:hover .bottom-panel {
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 440px){
+  .video-player-wrapper {
+    .bottom-panel {
+      display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 640px){
+  .video-player-wrapper {
+    &, video {
+      width: 640px;
+      height: 360px;
+    }
+  }
+}
+
+@media screen and (min-width: 992px){
+  .video-player-wrapper {
+    &, video {
+      width: 854px;
+      height: 480px;
+    }
+  }
+}

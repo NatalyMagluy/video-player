@@ -1,0 +1,96 @@
+<div class="video-controls">
+    <div class="left">
+        <div class="group">
+            <span class="glyphicon glyphicon-step-backward"
+                  aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-backward"
+                  aria-hidden="true"></span>
+
+            <div class="one-icon-only">
+                <span ng-if="!controls.isPlaying"
+                      class="glyphicon glyphicon-play"
+                      aria-hidden="true">
+                </span>
+
+                <span ng-if="controls.isPlaying"
+                      class="glyphicon glyphicon-pause"
+                      aria-hidden="true">
+                </span>
+            </div>
+
+            <span class="glyphicon glyphicon-forward"
+                  aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-step-forward"
+                  aria-hidden="true"></span>
+        </div>
+
+        <div class="time group">
+            00:02 / 05:10
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="volume group">
+            <div class="one-icon-only">
+                <span ng-if="controls.currentVolume == 0"
+                      class="glyphicon glyphicon-volume-off"
+                      aria-hidden="true">
+                </span>
+
+                <span ng-if="controls.currentVolume >= 1 && controls.currentVolume <= 6"
+                      class="glyphicon glyphicon-volume-down"
+                      aria-hidden="true">
+                </span>
+
+                <span ng-if="controls.currentVolume > 6"
+                      class="glyphicon glyphicon-volume-up"
+                      aria-hidden="true">
+                </span>
+            </div>
+
+            <input type="range" min="0" max="10"
+                   ng-model="controls.currentVolume">
+        </div>
+
+        <div class="settings-wrapper group">
+            <span class="glyphicon glyphicon-cog"
+                  aria-hidden="true"
+                  ng-click="controls.showResolutions = !controls.showResolutions;">
+            </span>
+
+            <div ng-class="{ visible: controls.showResolutions }" class="settings-list resolutions">
+                <div ng-repeat="res in controls.resolutions">
+                    {{::res}}
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-wrapper group">
+            <span class="glyphicon glyphicon-film"
+                  aria-hidden="true"
+                  ng-click="controls.showModes = !controls.showModes;">
+            </span>
+
+            <div ng-class="{ visible: controls.showModes }" class="settings-list modes">
+                <div>
+                    MSE
+                </div>
+                <div>
+                    Library
+                </div>
+            </div>
+        </div>
+
+        <div class="group one-icon-only">
+            <span ng-if="!controls.fullScreenEntered"
+                  class="glyphicon glyphicon-resize-full"
+                  aria-hidden="true">
+            </span>
+
+            <span ng-if="controls.fullScreenEntered"
+                  class="glyphicon glyphicon-resize-small"
+                  aria-hidden="true">
+            </span>
+        </div>
+    </div>
+</div>
