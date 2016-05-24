@@ -1,9 +1,11 @@
-<div class="video-seek">
+<div class="video-seek"
+     ng-mousemove="seek.onMouseMove($event)"
+     ng-click="seek.setTime()">
     <div class="seek-track"></div>
-    <div class="loaded" style="width: 50%;"></div>
-    <div class="seeking" style="width: 20%;"></div>
-    <div class="played" style="width: 10%;"></div>
-    <div class="seekable-time" style="left: 20%">
-        00:50
+    <div class="loaded" style="width: {{seek.bufferedPercentage}}%;"></div>
+    <div class="seeking" style="width: {{seek.seekedPercentage}}%;"></div>
+    <div class="played" style="width: {{seek.playedPercentage}}%;"></div>
+    <div class="seekable-time" style="left: {{seek.seekableTimeOffset}}%">
+        {{seek.seekableTime}}
     </div>
 </div>

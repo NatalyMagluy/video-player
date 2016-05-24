@@ -16,6 +16,13 @@
 
   @include no-text-select;
 
+  video {
+    //hide native video controls in fullscreen mode
+    &::-webkit-media-controls, &::-webkit-media-controls-enclosure {
+      display:none !important;
+    }
+  }
+
   .bottom-panel {
     display: none;
     position: absolute;

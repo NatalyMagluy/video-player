@@ -1,0 +1,32 @@
+{
+  "clips": [
+    {
+      "id": "1",
+      "name": "Madagascar",
+      "path": "video/madagascar/hls/madagascar_all.m3u8",
+      "thumbnail": "video/madagascar/thumbnail.png",
+      "author": "DreamWorks SKG"
+    },
+    {
+      "id": "2",
+      "name": "Ice Age",
+      "path": "video/ice_age/hls/ice_age_all.m3u8",
+      "thumbnail": "video/ice_age/thumbnail.png",
+      "author": "Twentieth Century Fox Film Corporation"
+    },
+    {
+      "id": "3",
+      "name": "Cars",
+      "path": "video/cars/hls/cars_all.m3u8",
+      "thumbnail": "video/cars/thumbnail.png",
+      "author": "Pixar Animation Studios"
+    },
+    {
+      "id": "4",
+      "name": "Big Bunny (External)",
+      "absPath": "http://www.streambox.fr/playlists/x36xhzz/x36xhzz.m3u8",
+      "absThumbnailPath": "http://www.ozwallpaper.com/wp-content/uploads/ktz/Big-Buck-Bunny-Wallpaper-mmya2mtd8zymd84dz2y9322hs2va0bcntiphwxcts0.jpg",
+      "author": "Blender Foundation"
+    }
+  ]
+}
