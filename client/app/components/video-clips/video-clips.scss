@@ -1,0 +1,94 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.current-clip {
+  margin: 20px 0 30px;
+
+  h1 {
+    font-size: 3em;
+  }
+}
+
+.available-clips {
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 2em;
+  }
+
+  .image {
+    $height: 100px;
+
+    position: relative;
+    height: $height;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+
+    .play-button-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: 0;
+
+      .glyphicon {
+        font-size: 56px;
+        line-height: $height;
+        color: #ffffff;
+        display: block;
+        text-align: center;
+      }
+    }
+
+    .now-playing {
+      position: absolute;
+      top: -30px;
+      right: 10px;
+      padding: 4px;
+      color: #ffffff;
+      background-color: $transparent-black;
+      transition: top 0.3s;
+      z-index: 10;
+
+      &.visible {
+        top: 10px;
+      }
+    }
+
+    &:hover .play-button-wrapper {
+      opacity: 1;
+    }
+  }
+
+  h3 {
+    font-size: 1.5em;
+    margin: 5px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.video-author {
+  color: #666666;
+}
+
+@media screen and (min-width: 530px) {
+  $height: 200px;
+
+  .available-clips .image {
+    height: $height;
+
+    .play-button-wrapper .glyphicon {
+      line-height: $height;
+    }
+  }
+}

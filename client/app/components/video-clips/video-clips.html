@@ -1,0 +1,36 @@
+<div class="current-clip">
+  <h1>{{clips.currentClip.name}}</h1>
+  <p class="video-author">{{clips.currentClip.author}}</p>
+</div>
+
+<div class="available-clips">
+  <h2>Available clips:</h2>
+
+  <div class="row">
+    <div ng-repeat="clip in clips.clips" class="col-xs-6 col-md-4">
+      <div class="thumbnail">
+        <div ng-click="clips.updateClip({clip:clip})"
+             class="image"
+             style="background-image: url('{{::clip.absThumbnailPath}}')">
+          <div class="play-button-wrapper">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+          </div>
+
+          <span ng-class="{visible: clips.currentClip.id === clip.id}"
+                class="now-playing">
+              Now playing
+            </span>
+        </div>
+
+        <div class="caption">
+          <h3>
+            {{::clip.name}}
+          </h3>
+
+          <p class="video-author">{{::clip.author}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

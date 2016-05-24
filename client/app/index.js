@@ -10,6 +10,7 @@ var mainHeaderDirective = require('./components/main-header/main-header.directiv
 var playerDirective = require('./components/video-player/video-player.directive');
 var videoSeekDirective = require('./components/video-seek/video-seek.directive');
 var videoControlsDirective = require('./components/video-controls/video-controls.directive');
+var videoClipsDirective = require('./components/video-clips/video-clips.directive');
 var name = 'videoPlayer';
 
 //TODO: check if this is correct way to do it
@@ -25,5 +26,6 @@ module.exports = angular
     .directive('player', playerDirective)
     .directive('videoSeek', videoSeekDirective)
     .directive('videoControls', videoControlsDirective)
+    .directive('videoClips', videoClipsDirective)
     .config(config)
     .config(routes);

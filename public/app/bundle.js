@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "018cf63388de99ce43b7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d7385d6f5a27bf491a56"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -695,7 +695,7 @@
 	__webpack_require__(4)();
 	// load the main app file
 	var appModule = __webpack_require__(32);
-	__webpack_require__(98)();
+	__webpack_require__(102)();
 
 	// replaces ng-app="appName"
 	angular.element(document).ready(function () {
@@ -44260,12 +44260,13 @@
 	var playerDirective = __webpack_require__(84);
 	var videoSeekDirective = __webpack_require__(89);
 	var videoControlsDirective = __webpack_require__(93);
+	var videoClipsDirective = __webpack_require__(97);
 	var name = 'videoPlayer';
 
 	//TODO: check if this is correct way to do it
 	module.exports = angular
 	    .module(name, [
-	        __webpack_require__(97)
+	        __webpack_require__(101)
 	    ])
 	    .controller('MainController', MainController)
 	    .service('ClipsService', ClipsService)
@@ -44275,6 +44276,7 @@
 	    .directive('player', playerDirective)
 	    .directive('videoSeek', videoSeekDirective)
 	    .directive('videoControls', videoControlsDirective)
+	    .directive('videoClips', videoClipsDirective)
 	    .config(config)
 	    .config(routes);
 
@@ -69757,7 +69759,7 @@
 /* 85 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"theater\">\n  <div class=\"video-player-wrapper\">\n    <video>\n      <p>\n        Sorry, your browser doesn't support HTML5 video.\n      </p>\n    </video>\n    <div class=\"bottom-panel\">\n      <video-seek></video-seek>\n      <video-controls></video-controls>\n    </div>\n  </div>\n</div>"
+	module.exports = "<div class=\"theater\">\n  <div class=\"video-player-wrapper\">\n    <video>\n      <p>\n        Sorry, your browser doesn't support HTML5 video.\n      </p>\n    </video>\n    <div class=\"bottom-panel\">\n      <video-seek></video-seek>\n      <video-controls></video-controls>\n    </div>\n  </div>\n</div>\n\n<div class=\"container\">\n  <video-clips clips=\"player.clips\"\n               current-clip=\"player.currentClip\"\n               update-clip=\"player.updateClip(clip)\">\n  </video-clips>\n</div>"
 
 /***/ },
 /* 86 */
@@ -70172,6 +70174,79 @@
 
 /***/ },
 /* 97 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var template = __webpack_require__(98);
+	__webpack_require__(99);
+
+	module.exports = function videoSeek() {
+	    'use strict';
+
+	    return {
+	        restrict: 'E',
+	        template: template,
+	        controller: function VideoClipsController() {
+	            // var vm = this;
+	        },
+	        controllerAs: 'clips',
+	        bindToController: {
+	            clips: '=',
+	            currentClip: '=',
+	            updateClip: '&'
+
+	        }
+	    };
+	};
+
+
+/***/ },
+/* 98 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"current-clip\">\n  <h1>{{clips.currentClip.name}}</h1>\n  <p class=\"video-author\">{{clips.currentClip.author}}</p>\n</div>\n\n<div class=\"available-clips\">\n  <h2>Available clips:</h2>\n\n  <div class=\"row\">\n    <div ng-repeat=\"clip in clips.clips\" class=\"col-xs-6 col-md-4\">\n      <div class=\"thumbnail\">\n        <div ng-click=\"clips.updateClip({clip:clip})\"\n             class=\"image\"\n             style=\"background-image: url('{{::clip.absThumbnailPath}}')\">\n          <div class=\"play-button-wrapper\">\n            <span class=\"glyphicon glyphicon-play\" aria-hidden=\"true\"></span>\n          </div>\n\n          <span ng-class=\"{visible: clips.currentClip.id === clip.id}\"\n                class=\"now-playing\">\n              Now playing\n            </span>\n        </div>\n\n        <div class=\"caption\">\n          <h3>\n            {{::clip.name}}\n          </h3>\n\n          <p class=\"video-author\">{{::clip.author}}</p>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n"
+
+/***/ },
+/* 99 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(100);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(16)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(true) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept(100, function() {
+				var newContent = __webpack_require__(100);
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".current-clip {\n  margin: 20px 0 30px; }\n  .current-clip h1 {\n    font-size: 3em; }\n\n.available-clips {\n  margin-bottom: 20px; }\n  .available-clips h2 {\n    font-size: 2em; }\n  .available-clips .image {\n    position: relative;\n    height: 100px;\n    background-position: center;\n    background-repeat: no-repeat;\n    background-size: cover;\n    cursor: pointer;\n    overflow: hidden; }\n    .available-clips .image .play-button-wrapper {\n      position: absolute;\n      top: 0;\n      right: 0;\n      bottom: 0;\n      left: 0;\n      background-color: rgba(0, 0, 0, 0.4);\n      opacity: 0;\n      transition: opacity .3s;\n      z-index: 0; }\n      .available-clips .image .play-button-wrapper .glyphicon {\n        font-size: 56px;\n        line-height: 100px;\n        color: #ffffff;\n        display: block;\n        text-align: center; }\n    .available-clips .image .now-playing {\n      position: absolute;\n      top: -30px;\n      right: 10px;\n      padding: 4px;\n      color: #ffffff;\n      background-color: rgba(0, 0, 0, 0.6);\n      transition: top 0.3s;\n      z-index: 10; }\n      .available-clips .image .now-playing.visible {\n        top: 10px; }\n    .available-clips .image:hover .play-button-wrapper {\n      opacity: 1; }\n  .available-clips h3 {\n    font-size: 1.5em;\n    margin: 5px 0; }\n  .available-clips p {\n    margin: 0; }\n\n.video-author {\n  color: #666666; }\n\n@media screen and (min-width: 530px) {\n  .available-clips .image {\n    height: 200px; }\n    .available-clips .image .play-button-wrapper .glyphicon {\n      line-height: 200px; } }\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 101 */
 /***/ function(module, exports) {
 
 	/**
@@ -74751,7 +74826,7 @@
 	})(window, window.angular);
 
 /***/ },
-/* 98 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var appModule = __webpack_require__(32);
