@@ -5,6 +5,8 @@ var MainController = require('./main/main.controller');
 var ClipsService = require('./services/clips.service');
 var FormatService = require('./services/format.service');
 var VideoService = require('./services/video.service.js');
+var MseService = require('./services/mse.service.js');
+var XhrService = require('./services/xhr.service.js');
 
 var mainHeaderDirective = require('./components/main-header/main-header.directive');
 var playerDirective = require('./components/video-player/video-player.directive');
@@ -21,7 +23,9 @@ module.exports = angular
     .controller('MainController', MainController)
     .service('ClipsService', ClipsService)
     .service('FormatService', FormatService)
+    .service('XhrService', XhrService)
     .service('VideoService', VideoService)
+    .factory('MseService', MseService)
     .directive('mainHeader', mainHeaderDirective)
     .directive('player', playerDirective)
     .directive('videoSeek', videoSeekDirective)

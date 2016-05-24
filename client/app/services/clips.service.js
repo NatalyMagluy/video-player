@@ -10,6 +10,9 @@ module.exports = function ClipsService($http, serverBaseUrl, clipsPath) {
           if (!el.absPath &&  el.path) {
             el.absPath = serverBaseUrl + el.path;
           }
+          if (!el.dashAbsPath &&  el.dashPath) {
+            el.dashAbsPath = serverBaseUrl + el.dashPath;
+          }
           
           if (!el.absThumbnailPath) {
             el.absThumbnailPath = serverBaseUrl + el.thumbnail;

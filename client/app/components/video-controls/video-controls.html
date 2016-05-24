@@ -82,10 +82,12 @@
             </span>
 
             <div ng-class="{visible: controls.showModes}" class="settings-list modes">
-                <div>
+                <div ng-click="controls.setMode(true)"
+                     ng-class="{active: player.isNativeMode}">
                     DASH (MSE)
                 </div>
-                <div ng-class="{active: true}">
+                <div ng-click="controls.setMode(false)"
+                     ng-class="{active: !player.isNativeMode}">
                     HLS (hls.js)
                 </div>
             </div>

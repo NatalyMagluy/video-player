@@ -106,6 +106,10 @@ module.exports = function videoControls() {
 
                     vm[toggleProp] = !vm[toggleProp];
                     vm[hideProp] = false;
+                },
+                setMode: function(isNative) {
+                    $scope.player.setMode(isNative);
+                    vm.showModes = false;
                 }
             });
 

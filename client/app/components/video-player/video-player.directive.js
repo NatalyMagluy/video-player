@@ -9,9 +9,9 @@ module.exports = function playerDirective() {
             ctrl.init(element.find('video')[0]);
         },
         controller: controller,
-        controllerAs: 'player',
         bindToController: {
             clips: '='
-        }
+        },
+        controllerAs: 'player'
     }
 };

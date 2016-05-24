@@ -4,6 +4,7 @@
       "id": "1",
       "name": "Madagascar",
       "path": "video/madagascar/hls/madagascar_all.m3u8",
+      "dashPath": "video/madagascar/dash/250883.mpd",
       "thumbnail": "video/madagascar/thumbnail.png",
       "author": "DreamWorks SKG"
     },
@@ -11,6 +12,7 @@
       "id": "2",
       "name": "Ice Age",
       "path": "video/ice_age/hls/ice_age_all.m3u8",
+      "dashPath": "video/ice_age/dash/250890.mpd",
       "thumbnail": "video/ice_age/thumbnail.png",
       "author": "Twentieth Century Fox Film Corporation"
     },
@@ -18,6 +20,7 @@
       "id": "3",
       "name": "Cars",
       "path": "video/cars/hls/cars_all.m3u8",
+      "dashPath": "video/cars/dash/250503.mpd",
       "thumbnail": "video/cars/thumbnail.png",
       "author": "Pixar Animation Studios"
     },

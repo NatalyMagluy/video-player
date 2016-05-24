@@ -82,7 +82,7 @@
     .settings-list {
       position: absolute;
       bottom: 45px;
-      display: none;
+      opacity: 0;
       background-color: rgba(0, 0, 0, 0.64);
       color: $light-grey;
       white-space: nowrap;
@@ -97,7 +97,8 @@
       }
 
       &.visible {
-        display: inline;
+        opacity: 1;
+
         > div {
           cursor: pointer;
         }

@@ -1,13 +1,18 @@
-module.exports = function PlayerController($scope, $timeout, VideoService, FormatService) {
-    var vm = this, initFunctions = [];
-    angular.extend(vm, {
-        addToInit: function (func) {
-            initFunctions.push(func);
-        },
-        init: function (videoEl) {
-            vm.videoEl = videoEl;
+module.exports = function PlayerController($document, $scope, $timeout, $rootScope, VideoService, FormatService) {
+    var vm = this, initFunctions = [], clips = vm.clips;
 
-            VideoService.init();
+
+    angular.extend(vm, {
+        isNativeMode: false,
+        setMode: function(isNativeMode) {
+            vm.isNativeMode = isNativeMode;
+
+            VideoService.setMode(vm.isNativeMode);
+            VideoService.initVideoElement(vm.videoEl);
+
+            vm.clips = _.reject(clips, function(clip) {
+                return !clip[vm.isNativeMode ? 'dashAbsPath' : 'absPath'];
+            });
 
             vm.currentClip = vm.clips[0];
             vm.totalDuration = '00:00:00';
@@ -32,13 +37,24 @@ module.exports = function PlayerController($scope, $timeout, VideoService, Forma
                 });
             });
 
-            VideoService.loadMedia(vm.currentClip.absPath, vm.videoEl);
+            VideoService.loadMedia(vm.isNativeMode ? vm.currentClip.dashAbsPath : vm.currentClip.absPath);
+
+        },
+        addToInit: function (func) {
+            initFunctions.push(func);
+        },
+        init: function (videoEl) {
+            vm.videoEl = videoEl;
+
+            vm.setMode(vm.isNativeMode);
 
             vm.videoEl.addEventListener('durationchange', function () {
-                $scope.$applyAsync(function () {
-                    vm.totalDurationSecs = vm.videoEl.duration;
-                    vm.totalDuration = FormatService.parseDuration(vm.videoEl.duration);
-                });
+                if (isFinite(vm.videoEl.duration)) {
+                    $scope.$applyAsync(function () {
+                        vm.totalDurationSecs = vm.videoEl.duration;
+                        vm.totalDuration = FormatService.parseDuration(vm.videoEl.duration);
+                    });
+                }
             });
 
             vm.videoEl.addEventListener('timeupdate', function () {
@@ -53,6 +69,9 @@ module.exports = function PlayerController($scope, $timeout, VideoService, Forma
             _.each(initFunctions, function (init) {
                 init();
             });
+
+            //todo: show bottom panel on mouseenter and hide on mousemove rather than on hover
+            //todo: when mouse is over video element but there wasn't any movement for three seconds, hide the bottom panel
         },
         changeResolution: function (level) {
             vm.currentClip.resolution = level;
@@ -62,7 +81,7 @@ module.exports = function PlayerController($scope, $timeout, VideoService, Forma
             vm.currentClip = clip;
             document.body.scrollTop = 0;
 
-            VideoService.loadMedia(vm.currentClip.absPath, vm.videoEl);
+            VideoService.loadMedia(vm.isNativeMode ? vm.currentClip.dashAbsPath : vm.currentClip.absPath);
         },
         goToNextVideo: function (forward) {
             var currentClipIndex = _.indexOf(vm.clips, vm.currentClip);

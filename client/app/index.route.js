@@ -7,7 +7,12 @@ module.exports = function routerConfig($stateProvider, $urlRouterProvider) {
         url: '/',
         template: mainTemplate,
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        /*resolve: {
+            clips: ['ClipsService', function (ClipsService) {
+              return ClipsService.getList();
+            }]
+        }*/
       });
 
   $urlRouterProvider.otherwise('/');

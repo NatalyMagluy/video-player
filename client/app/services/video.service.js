@@ -1,25 +1,46 @@
 var Hls = require('hls.js');
 
-module.exports = function VideoFactory() {
-    var hlsObj;
+module.exports = function VideoFactory(MseService) {
+    var mode, hlsObj, video;
     return {
-        init: function() {
-            hlsObj = new Hls({
-                autoLevelEnabled: false
-            });
+        setMode: function(useNative) {
+            mode = useNative;
+            if (!mode) {
+                hlsObj = new Hls({
+                    autoLevelEnabled: false
+                });
+            }
         },
-        loadMedia: function(src, video) {
+        initVideoElement: function(_video) {
+            video = _video;
+            if (mode) {
+                MseService.init(video);
+            }
+        },
+        loadMedia: function(src) {
             video.pause();
-            hlsObj.loadSource(src);
-            hlsObj.attachMedia(video);
+            if (!mode) {
+                hlsObj.loadSource(src);
+                hlsObj.attachMedia(video);
+            } else {
+                MseService.loadMedia(src);
+            }
         },
         setResolution: function(level) {
-            hlsObj.currentLevel = level;
+            if (!mode) {
+                hlsObj.currentLevel = level;
+            } else {
+                MseService.setResolution(level);
+            }
         },
         onResolutionsLoaded: function(func) {
-            hlsObj.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
-                func(data.levels);
-            });
+            if (!mode) {
+                hlsObj.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+                    func(data.levels);
+                });
+            } else {
+                MseService.onResolutionsLoaded(func);
+            }
         }
     }
 };
