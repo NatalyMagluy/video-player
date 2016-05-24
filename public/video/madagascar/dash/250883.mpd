@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<MPD type="static" availabilityStartTime="2016-05-20T15:35:53Z" mediaPresentationDuration="PT2M32S" minBufferTime="PT10S" timeShiftBufferDepth="PT30S" xmlns="urn:mpeg:dash:schema:mpd:2011" profiles="urn:mpeg:dash:profile:isoff-main:2011">
+  <Period>
+    <AdaptationSet mimeType="video/mp4" codecs="avc1.42c00d">
+      <Representation width="1920" height="1080" frameRate="24" id="1080p 4800kbps" bandwidth="4800000">
+        <SegmentTemplate timescale="23976" duration="93589" startNumber="0" media="video_0_4800000/dash/segment_$Number$.m4s" initialization="video_0_4800000/dash/init.mp4"/>
+      </Representation>
+      <Representation width="1280" height="720" frameRate="24" id="720p 2400kbps" bandwidth="2400000">
+        <SegmentTemplate timescale="23976" duration="93589" startNumber="0" media="video_0_2400000/dash/segment_$Number$.m4s" initialization="video_0_2400000/dash/init.mp4"/>
+      </Representation>
+      <Representation width="854" height="480" frameRate="24" id="480p 1200kbps" bandwidth="1200000">
+        <SegmentTemplate timescale="23976" duration="93589" startNumber="0" media="video_0_1200000/dash/segment_$Number$.m4s" initialization="video_0_1200000/dash/init.mp4"/>
+      </Representation>
+      <Representation width="640" height="360" frameRate="24" id="360p 800kbps" bandwidth="800000">
+        <SegmentTemplate timescale="23976" duration="93589" startNumber="0" media="video_0_800000/dash/segment_$Number$.m4s" initialization="video_0_800000/dash/init.mp4"/>
+      </Representation>
+      <Representation width="426" height="238" frameRate="24" id="238p 400kbps" bandwidth="400000">
+        <SegmentTemplate timescale="23976" duration="93589" startNumber="0" media="video_0_400000/dash/segment_$Number$.m4s" initialization="video_0_400000/dash/init.mp4"/>
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet mimeType="audio/mp4" codecs="mp4a.40.2" streamName="stereo">
+      <Representation audioSamplingRate="44100" id="128kbps" bandwidth="128000">
+        <SegmentTemplate timescale="23976" duration="93589" startNumber="0" media="audio_0_128000/dash/segment_$Number$.m4s" initialization="audio_0_128000/dash/init.mp4"/>
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
